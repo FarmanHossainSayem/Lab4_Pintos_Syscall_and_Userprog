@@ -153,11 +153,11 @@ syscall_handler (struct intr_frame *f ) // UNUSED)
   case SYS_SEEK: //Nasif Changes 
   // Adding seek function passes lg-random, sm-random, syn-remove
     get_args(f->esp,(void **)&s_args,2);
-    int fd = (int)(s_args[0]);
+    int fd = (int)(s_args[0]); // Changes Sayem to fix rox-child, rox multichild
     unsigned int position = (unsigned int)s_args[1];
     s_seek(fd,position);
     //s_seek(s_args[0],(unsigned) s_args[1]);
-    break;
+    break; //Changes Sayem
 
  case SYS_CLOSE:
     get_args(f->esp, (void **)&s_args, 1);
@@ -214,7 +214,7 @@ int s_filesize(int fid) {
     lock_acquire(&file_lock);    
     size = file_length(fp);
     lock_release(&file_lock);    
-    // free(fp);
+    // free(fp); // Changes by Sayem, to fix read-normal
   }
   return size;
 }
